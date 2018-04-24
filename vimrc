@@ -14,10 +14,7 @@ augroup strip_traling_spaces
 augroup END
 
 " 当vimrc保存时，重载它
-augroup reload_vim_config
-    au!
-    au BufWritePost $MYVIMRC source $MYVIMRC | :e $MYVIMRC
-augroup END
+au! BufWritePost $MYVIMRC source $MYVIMRC 
 
 set nocompatible
 set nobackup
@@ -105,10 +102,12 @@ set foldmethod=indent
 " }}}
 
 " Python √{{{
-autocmd BufNewFile, BufRead *.py
+autocmd! BufNewFile, BufRead *.py
 \ set shiftwidth=4
 \ set fileformat=unix
 au! BufNewFile, *.py call append(0, "\# -*- coding: utf-8 -*-")
+"nnoremap <F5> :exec '!python' shellescape(@%, 1)<cr>
+au! FileType Python nnoremap <buffer> <F5> :exec '!python' shellescape(@%, 1)<cr>
 " }}}
 
 " Keymap {{{
