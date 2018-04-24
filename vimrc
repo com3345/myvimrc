@@ -16,7 +16,7 @@ augroup END
 " 当vimrc保存时，重载它
 augroup reload_vim_config
     au!
-    au BufWritePost $MYVIMRC source $MYVIMRC
+    au BufWritePost $MYVIMRC source $MYVIMRC | :e $MYVIMRC
 augroup END
 
 set nocompatible
@@ -223,3 +223,4 @@ function! <SID>StripTrailingSpaces()
     call cursor(l, c)
 endfunction
 "}}}
+
