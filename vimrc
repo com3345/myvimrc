@@ -3,18 +3,19 @@ filetype plugin indent on
 " 根据平台和分辨率大小自动设置字体大小 
 autocmd VimEnter * call SetFont(GetOS(), GetFtSize())
 " vim折叠方式为marker
-au! FileType vim setlocal foldmethod=marker
+au FileType vim setlocal foldmethod=marker
 " }}}
 
 " General {{{
 
 augroup strip_traling_spaces
-    au!
-    autocmd FileType css, javascript, python autocmd BufWritePre <buffer> call <SID>StripTrailingSpaces() 
+au!
+autocmd FileType css, javascript, python autocmd BufWritePre <buffer> call <SID>StripTrailingSpaces() 
 augroup END
 
 " 当vimrc保存时，重载它
-au! BufWritePost $MYVIMRC source $MYVIMRC 
+au! BufWritePost $MYVIMRC source $MYVIMRC
+
 
 set nocompatible
 set nobackup
@@ -62,6 +63,13 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'szw/vim-g'
+" ----- Ale ----- {{{
+le g:airline#extensions#ale#enabled = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+" }}}
+Plugin 'w0rp/ale'
+
 " ----- NerdTree ----- {{{
 Plugin 'scrooloose/nerdtree'
 
@@ -218,7 +226,7 @@ endfunction
 function! <SID>StripTrailingSpaces()
     let l = line(".")
     let c = col(".")
-    %s/\s\+$//e
+:%s/\s\+$//e
     call cursor(l, c)
 endfunction
 "}}}
