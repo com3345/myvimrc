@@ -116,6 +116,7 @@ autocmd! BufNewFile, BufRead *.py
 au! BufNewFile, *.py call append(0, "\# -*- coding: utf-8 -*-")
 "nnoremap <F5> :exec '!python' shellescape(@%, 1)<cr>
 au! FileType Python nnoremap <buffer> <F5> :exec '!python' shellescape(@%, 1)<cr>
+autocmd! FileType python nnoremap <leader>= :0,$!yapf<CR>
 " }}}
 
 " Keymap {{{
