@@ -64,11 +64,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'szw/vim-g'
 " ----- Ale ----- {{{
+Plugin 'w0rp/ale'
 le g:airline#extensions#ale#enabled = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 " }}}
-Plugin 'w0rp/ale'
 
 " ----- NerdTree ----- {{{
 Plugin 'scrooloose/nerdtree'
@@ -87,7 +87,7 @@ endif
 Plugin 'davidhalter/jedi-vim'
 " }}}
 
-" ----- Airline ---- {{{
+" ----- Airline ----- {{{
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 let g:airline#extensions#tabline#enabled = 1
@@ -128,10 +128,10 @@ map <leader>goo :Google<cr>
 nmap <leader>s :source $MYVIMRC<cr>
 nmap <leader>e :e $MYVIMRC<cr>
 " tab创建/关闭/遍历
-map <leader>tn :tabnew<cr>
-map <leader>tc :tabclose<cr>
-map <leader>th :tabp<cr>
-map <leader>tl :tabn<cr>
+"map <leader>tn :tabnew<cr>
+"map <leader>tc :tabclose<cr>
+"map <leader>th :tabp<cr>
+"map <leader>tl :tabn<cr>
 
 nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
@@ -214,21 +214,22 @@ function! GetFtSize()
         let height = 1080
     else
         let height = system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4")
+    endif
     if height > 1200
-        let fontsize = "h18"
-    elseif height > 900
         let fontsize = "h16"
-    else
+    elseif height > 900
         let fontsize = "h14"
+    else
+let fontsize = "h12"
     endif
     return fontsize
 endfunction
 
 function! <SID>StripTrailingSpaces()
-    let l = line(".")
-    let c = col(".")
+let l = line(".")
+let c = col(".")
 :%s/\s\+$//e
-    call cursor(l, c)
+call cursor(l, c)
 endfunction
 "}}}
 
