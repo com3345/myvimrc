@@ -16,7 +16,7 @@ augroup END
 " 当vimrc保存时，重载它
 au! BufWritePost $MYVIMRC source $MYVIMRC
 
-
+set hlsearch
 set nocompatible
 set nobackup
 set noundofile
