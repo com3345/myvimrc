@@ -167,6 +167,13 @@ nnoremap ∆ :resize +5<cr>
 nnoremap ˚ :resize -5<cr>
 nnoremap ˙ :vertical resize -5<cr>
 nnoremap ¬ :vertical resize +5<cr>
+nnoremap <M-l> :resize +10<cr>
+nnoremap <M-h> :resize -10<cr>
+nnoremap <M-k> :vertical resize -10<cr>
+nnoremap <M-j> :vertical resize +10<cr>
+
+
+
 
 " 打开各种程序
 map <leader>cmd :exe has("mac")==1 ? ':!open -a terminal' : ':silent !start cmd'
