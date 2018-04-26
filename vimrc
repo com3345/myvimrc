@@ -127,11 +127,7 @@ nnoremap <F3> :setlocal number!<cr>
 map <leader>goo :Google<cr>
 nmap <leader>s :source $MYVIMRC<cr>
 nmap <leader>e :e $MYVIMRC<cr>
-" tab创建/关闭/遍历
-"map <leader>tn :tabnew<cr>
-"map <leader>tc :tabclose<cr>
-"map <leader>th :tabp<cr>
-"map <leader>tl :tabn<cr>
+map <leader>to :e $MYVIMRC
 
 nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
