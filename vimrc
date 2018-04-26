@@ -125,9 +125,10 @@ let mapleader=" "
 nnoremap <F2> :NERDTreeToggle<cr>
 nnoremap <F3> :setlocal number!<cr>
 map <leader>goo :Google<cr>
+map <leader><ESC> :noh<cr>
 nmap <leader>s :source $MYVIMRC<cr>
 nmap <leader>e :e $MYVIMRC<cr>
-map <leader>to :e $MYVIMRC
+map <leader>t :e $HOME/.vim/todo<cr>
 
 nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
