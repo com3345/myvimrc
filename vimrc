@@ -79,7 +79,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
 let g:NERDTreeWinPos='right'
 if exists('g:NERDTreeWinPos')
-    au vimenter * NERDTree | wincmd p
+    au vimenter * silence NERDTree | wincmd p
 endif
 "  }}}
 
