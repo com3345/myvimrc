@@ -16,7 +16,7 @@ augroup END
 " 当vimrc保存时，重载它
 au! BufWritePost $MYVIMRC source $MYVIMRC
 
-
+set hlsearch
 set nocompatible
 set nobackup
 set noundofile
@@ -73,13 +73,13 @@ let g:ale_set_quickfix = 1
 " ----- NerdTree ----- {{{
 Plugin 'scrooloose/nerdtree'
 
-let NERDTreeIgnore=['.idea', '*.pyc']
+let NERDTreeIgnore=['\.idea$', '\.pyc$', '\.png$']
 let NERDTreeBookmarksFile=$VIM . '/NERDTreeBookmarks'
 let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
 let g:NERDTreeWinPos='right'
 if exists('g:NERDTreeWinPos')
-    au vimenter * NERDTree | wincmd p
+    au vimenter * silent NERDTree | wincmd p
 endif
 "  }}}
 
@@ -163,9 +163,16 @@ nnoremap ∆ :resize +5<cr>
 nnoremap ˚ :resize -5<cr>
 nnoremap ˙ :vertical resize -5<cr>
 nnoremap ¬ :vertical resize +5<cr>
+nnoremap <M-j> :resize +5<cr>
+nnoremap <M-k> :resize -5<cr>
+nnoremap <M-h> :vertical resize -5<cr>
+nnoremap <M-l> :vertical resize +5<cr>
+
+
+
 
 " 打开各种程序
-map <leader>cmd :exe has("mac")==1 ? ':silent !open -a terminal' : ':silent !start cmd'
+map <leader>cmd :exe has("mac")==1 ? ':!open -a terminal' : ':silent !start cmd'
 map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\CloudMusic\neteasemusic.exe'
 
 " }}}
