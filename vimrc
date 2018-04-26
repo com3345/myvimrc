@@ -167,10 +167,10 @@ nnoremap ∆ :resize +5<cr>
 nnoremap ˚ :resize -5<cr>
 nnoremap ˙ :vertical resize -5<cr>
 nnoremap ¬ :vertical resize +5<cr>
-nnoremap <M-l> :resize +10<cr>
-nnoremap <M-h> :resize -10<cr>
-nnoremap <M-k> :vertical resize -10<cr>
-nnoremap <M-j> :vertical resize +10<cr>
+nnoremap <M-j> :resize +5<cr>
+nnoremap <M-k> :resize -5<cr>
+nnoremap <M-h> :vertical resize -5<cr>
+nnoremap <M-l> :vertical resize +5<cr>
 
 
 
