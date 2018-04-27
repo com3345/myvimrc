@@ -129,6 +129,7 @@ map <leader><ESC> :noh<cr>
 nmap <leader>s :source $MYVIMRC<cr>
 nmap <leader>e :e $MYVIMRC<cr>
 map <leader>t :e $HOME/.vim/todo<cr>
+map <leader>t :e $HOME/vimfiles/todo<cr>
 
 nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
