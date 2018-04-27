@@ -175,7 +175,7 @@ nnoremap <M-l> :vertical resize +5<cr>
 
 " 打开各种程序
 map <leader>cmd :exe has("mac")==1 ? ':!open -a terminal' : ':silent !start cmd'
-map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\CloudMusic\neteasemusic.exe'
+map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\Netease\CloudMusic\cloudmusic.exe'
 
 " }}}
 
