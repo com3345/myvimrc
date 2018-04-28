@@ -1,0 +1,5 @@
+1. :%![cmd]
+    用bash命令的输出替代当前file/buffer
+2. :read ![cmd]
+    添加bash命令的输出到当前文件
+    

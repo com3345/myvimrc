@@ -135,6 +135,8 @@ nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
 map <leader>bn :bn<cr>
 
+tnoremap <Esc> <C-\><C-n>
+
 " 命令模式下的行首尾
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
@@ -154,7 +156,7 @@ inoremap <M-k> <Up>
 inoremap <M-h> <Left>
 inoremap <M-l> <Right>
 
-" 移动分割窗口
+" 在窗口中切换
 nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
@@ -171,11 +173,9 @@ nnoremap <M-h> :vertical resize -5<cr>
 nnoremap <M-l> :vertical resize +5<cr>
 
 
-
-
 " 打开各种程序
-map <leader>cmd :exe has("mac")==1 ? ':!open -a terminal' : ':silent !start cmd'
-map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\Netease\CloudMusic\cloudmusic.exe'
+map <leader>cmd :exe has("mac")==1 ? ':!open -a terminal' : ':silent !start cmd'<CR>
+map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\Netease\CloudMusic\cloudmusic.exe'<CR> 
 
 " }}}
 
