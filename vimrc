@@ -135,8 +135,6 @@ nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
 map <leader>bn :bn<cr>
 
-tnoremap <Esc> <C-\><C-n>
-
 " 命令模式下的行首尾
 cnoremap <C-a> <home>
 cnoremap <C-e> <end>
