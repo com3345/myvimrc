@@ -73,7 +73,7 @@ let g:ale_set_quickfix = 1
 " ----- NerdTree ----- {{{
 Plugin 'scrooloose/nerdtree'
 
-let NERDTreeIgnore=['\.idea$', '\.pyc$', '\.png$']
+let NERDTreeIgnore=['\.idea$', '\.pyc$', '\.png$', '\.orig$']
 let NERDTreeBookmarksFile=$VIM . '/NERDTreeBookmarks'
 let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
