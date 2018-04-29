@@ -1,17 +1,24 @@
 " Startup {{{
 filetype plugin indent on 
 " 根据平台和分辨率大小自动设置字体大小 
-autocmd VimEnter * call SetFont(GetOS(), GetFtSize())
+autocmd VimEnter * call SetFont(GetFtSize())
 " vim折叠方式为marker
 au FileType vim setlocal foldmethod=marker
+if !exists('g:env')
+    if has('win64') || has('win32') || has('win16')
+let g:env = 'WINDOWS'
+    else
+        let g:env = toupper(substitute(system('uname'), '\n', '', ''))
+    endif
+endif
 " }}}
 
 " General {{{
 
-augroup strip_traling_spaces
-au!
-autocmd FileType css, javascript, python autocmd BufWritePre <buffer> call <SID>StripTrailingSpaces() 
-augroup END
+"augroup strip_traling_spaces
+"au!
+"autocmd FileType css, javascript, python autocmd BufWritePre <buffer> call <SID>StripTrailingSpaces() 
+"augroup END
 
 " 当vimrc保存时，重载它
 au! BufWritePost $MYVIMRC source $MYVIMRC
@@ -43,6 +50,8 @@ let $LANG = 'en_US.UTF-8'
 set t_Co=256
 colors zenburn 
 
+"hi Terminal guibg=#ff0000
+
 set splitbelow
 set splitright
 set guioptions-=T
@@ -50,11 +59,7 @@ set guioptions-=m
 set guioptions-=L
 set guioptions-=r
 set guioptions-=b
-if has("mac")
-    set lines=35 columns=140
-else
-    set lines=9999 columns=9999
-endif
+set lines=99999 columns=99999
 " }}}
 
 " Vundle {{{
@@ -63,6 +68,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'szw/vim-g'
+Plugin 'skywind3000/asyncrun.vim'
 " ----- Ale ----- {{{
 Plugin 'w0rp/ale'
 le g:airline#extensions#ale#enabled = 1
@@ -128,8 +134,7 @@ map <leader>goo :Google<cr>
 map <leader><ESC> :noh<cr>
 nmap <leader>s :source $MYVIMRC<cr>
 nmap <leader>e :e $MYVIMRC<cr>
-map <leader>t :e $HOME/.vim/todo<cr>
-map <leader>t :e $HOME/vimfiles/todo<cr>
+noremap <leader>t :exe g:env == "DARWIN" ? ':e $HOME/.vim/todo' : ':e $HOME/vimfiles/todo'<CR>
 
 nnoremap <leader>q :bp<cr>:bd #<cr>
 map <leader>bp :bp<cr>
@@ -172,8 +177,8 @@ nnoremap <M-l> :vertical resize +5<cr>
 
 
 " 打开各种程序
-map <leader>cmd :exe has("mac")==1 ? ':!open -a terminal' : ':silent !start cmd'<CR>
-map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\Netease\CloudMusic\cloudmusic.exe'<CR> 
+noremap <leader>cmd :exe g:env == "DARWIN" ? '!open -a terminal' : '!start cmd'<CR><CR>
+map <leader>yyy :exe g:env == "DARWIN" ? ':silent !open -a NeteaseMusic' : ':silent !start D:\Software\Netease\CloudMusic\cloudmusic.exe'<CR><CR>
 
 " }}}
 
@@ -187,28 +192,14 @@ map <leader>yyy :exe has("mac")==1 ? ':silent !open -a NeteaseMusic' : ':silent 
 "endfunction
 
 "vnoremap <F6> "gy<Esc>:call GoogleSearch()<CR>
-function! SetFont(os, size)
-    if a:os == "mac"
+function! SetFont(size)
+if g:env == "DARWIN"
         exe ':set guifont=Monaco:'.a:size
         echo 'Font was set to Monaco with size:'.a:size
-    elseif a:os == "win"
+    else:
         exe ':set guifont=Inconsolata:'.a:size
         echo 'Font was set to Inconsolata with size:'.a:size
     endif
-endfunction
-
-function! GetOS()
-    let osname = "mac"
-    if has("gui_running")
-        if has("gui_gtk3")
-            let osname = "else"
-        elseif has("gui_win32")
-            let osname = "win"
-        elseif has("gui_macvim")
-            let osname = "mac"
-        endif
-    endif
-    return osname
 endfunction
 
 function! GetFtSize()
