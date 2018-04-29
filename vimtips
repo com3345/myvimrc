@@ -6,3 +6,8 @@
                  :term                 Cw N
     normal-mode <-----> terminal-mode <-----> terminal-normal-mode
                  Cw Cc                   i
+4. 2>>
+    让包含自己在内的下数2行向右缩进
+5. <<5
+    让包含自己在内的下数5行向左缩进
+    用shiftwidth来设定>>/<<操作的宽度

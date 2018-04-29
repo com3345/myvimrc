@@ -1,16 +1,18 @@
 " Startup {{{
 filetype plugin indent on 
 " 根据平台和分辨率大小自动设置字体大小 
-autocmd VimEnter * call SetFont(GetFtSize())
+autocmd VimEnter * call GetEnv() | call SetFont(GetFtSize())
 " vim折叠方式为marker
 au FileType vim setlocal foldmethod=marker
-if !exists('g:env')
-    if has('win64') || has('win32') || has('win16')
-let g:env = 'WINDOWS'
-    else
-        let g:env = toupper(substitute(system('uname'), '\n', '', ''))
+function! GetEnv()
+    if !exists('g:env')
+        if has('win64') || has('win32') || has('win16')
+        let g:env = 'WINDOWS'
+        else
+            let g:env = toupper(substitute(system('uname'), '\n', '', ''))
+        endif
     endif
-endif
+endfunction
 " }}}
 
 " General {{{
@@ -31,7 +33,7 @@ set noswapfile
 set history=1024
 set autochdir "自动跳转到vim打开的文件所在的目录
 set nobomb "不要bom头
-set backspace=indent,eol,start "然退格键可以删除到上一行/缩进并可以超过插入模式插入的地方
+set backspace=indent,eol,start "让退格键可以删除到上一行/缩进并可以超过插入模式插入的地方
 set clipboard+=unnamed "让系统剪贴板和vim共享
 set showcmd
 set number "显示行号
@@ -107,16 +109,16 @@ call vundle#end()
 " }}}
 
 " Format √ {{{
-set autoindent
 set smartindent
 set tabstop=4
 set softtabstop=4
-set expandtab
+set shiftwidth=4
+set noexpandtab
 set foldmethod=indent
 " }}}
 
 " Python √{{{
-autocmd! BufNewFile, BufRead *.py
+    autocmd! BufNewFile, BufRead *.py
 \ set shiftwidth=4
 \ set fileformat=unix
 au! BufNewFile, *.py call append(0, "\# -*- coding: utf-8 -*-")
@@ -204,8 +206,8 @@ endfunction
 
 function! GetFtSize()
     let fontsize = "h16"
-    if has("gui_win32")
-        let height = 1080
+if has("gui_win32")
+let height = 1080
     else
         let height = system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4")
     endif
