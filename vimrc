@@ -4,24 +4,9 @@ filetype plugin indent on
 autocmd VimEnter * call GetEnv() | call SetFont(GetFtSize())
 " vim折叠方式为marker
 au FileType vim setlocal foldmethod=marker
-function! GetEnv()
-    if !exists('g:env')
-        if has('win64') || has('win32') || has('win16')
-        let g:env = 'WINDOWS'
-        else
-            let g:env = toupper(substitute(system('uname'), '\n', '', ''))
-        endif
-    endif
-endfunction
 " }}}
 
 " General {{{
-
-"augroup strip_traling_spaces
-"au!
-"autocmd FileType css, javascript, python autocmd BufWritePre <buffer> call <SID>StripTrailingSpaces() 
-"augroup END
-
 " 当vimrc保存时，重载它
 au! BufWritePost $MYVIMRC source $MYVIMRC
 
@@ -113,7 +98,7 @@ set smartindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 set foldmethod=indent
 " }}}
 
@@ -185,29 +170,30 @@ map <leader>yyy :exe g:env == "DARWIN" ? ':silent !open -a NeteaseMusic' : ':sil
 " }}}
 
 " Functions {{{
-"function! GoogleSearch()
-"    let searchterm = getreg("g")
-"    if has("mac")
-"        exec ':silent !open -a "Google Chrome" "http://google.com/search?q=' . searchterm .'"'
-"    else
-"        exec ':silent !start C:\Chrome "http://google.com/search?q=' . searchterm . '"'
-"endfunction
+function! GetEnv()
+    if !exists('g:env')
+        if has('win64') || has('win32') || has('win16')
+        let g:env = 'WINDOWS'
+        else
+            let g:env = toupper(substitute(system('uname'), '\n', '', ''))
+        endif
+    endif
+endfunction
 
-"vnoremap <F6> "gy<Esc>:call GoogleSearch()<CR>
 function! SetFont(size)
-if g:env == "DARWIN"
+    if g:env == "DARWIN"
         exe ':set guifont=Monaco:'.a:size
         echo 'Font was set to Monaco with size:'.a:size
-    else:
+    else
         exe ':set guifont=Inconsolata:'.a:size
-        echo 'Font was set to Inconsolata with size:'.a:size
+        echo 'Font was set to Inconsolat:'.a:size
     endif
 endfunction
 
 function! GetFtSize()
     let fontsize = "h16"
-if has("gui_win32")
-let height = 1080
+    if g:env != "DARWIN" 
+        let height = 1080
     else
         let height = system("osascript -e 'tell application \"Finder\" to get bounds of window of desktop' | cut -d ' ' -f 4")
     endif
@@ -216,16 +202,9 @@ let height = 1080
     elseif height > 900
         let fontsize = "h14"
     else
-let fontsize = "h12"
+        let fontsize = "h12"
     endif
     return fontsize
-endfunction
-
-function! <SID>StripTrailingSpaces()
-let l = line(".")
-let c = col(".")
-:%s/\s\+$//e
-call cursor(l, c)
 endfunction
 "}}}
 
