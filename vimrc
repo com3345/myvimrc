@@ -9,7 +9,11 @@ au FileType vim setlocal foldmethod=marker
 " General {{{
 " 当vimrc保存时，重载它
 au! BufWritePost $MYVIMRC source $MYVIMRC
-
+if g:env == "DARWIN"
+    au! BufWritePre $HOME/.vim/todo exe ':%sort'
+else
+    au! BufWritePre $HOME/vimfiles/todo exe ':%sort'
+endif
 set hlsearch
 set nocompatible
 set nobackup
