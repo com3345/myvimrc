@@ -9,11 +9,7 @@ au FileType vim setlocal foldmethod=marker
 " General {{{
 " 当vimrc保存时，重载它
 au! BufWritePost $MYVIMRC source $MYVIMRC
-if g:env == "DARWIN"
-    au! BufWritePre $HOME/.vim/todo exe ':%sort'
-else
-    au! BufWritePre $HOME/vimfiles/todo exe ':%sort'
-endif
+
 set hlsearch
 set nocompatible
 set nobackup
@@ -112,7 +108,7 @@ set foldmethod=indent
 \ set fileformat=unix
 au! BufNewFile, *.py call append(0, "\# -*- coding: utf-8 -*-")
 "nnoremap <F5> :exec '!python' shellescape(@%, 1)<cr>
-au! FileType Python nnoremap <buffer> <F5> :exec '!python' shellescape(@%, 1)<cr>
+au! FileType Python nnoremap <buffer> <F5> :w<cr> :exec '!python' shellescape(@%, 1)<cr>
 autocmd! FileType python nnoremap <leader>= :0,$!yapf<CR>
 " }}}
 
@@ -181,6 +177,11 @@ function! GetEnv()
         else
             let g:env = toupper(substitute(system('uname'), '\n', '', ''))
         endif
+    endif
+    if g:env == "DARWIN"
+        au! BufWritePre $HOME/.vim/todo exe ':%sort'
+    else
+        au! BufWritePre $HOME/vimfiles/todo exe ':%sort'
     endif
 endfunction
 
