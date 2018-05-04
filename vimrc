@@ -46,7 +46,6 @@ set guioptions-=m
 set guioptions-=L
 set guioptions-=r
 set guioptions-=b
-set lines=99999 columns=99999
 " }}}
 
 " Vundle {{{
@@ -72,7 +71,11 @@ let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
 let g:NERDTreeWinPos='right'
 if exists('g:NERDTreeWinPos')
-    au vimenter * silent NERDTree | wincmd p
+    if exists('g:env')
+        if g:env != "LINUX"
+            au vimenter * silent NERDTree | wincmd p
+        endif
+    endif
 endif
 "  }}}
 
@@ -182,6 +185,11 @@ function! GetEnv()
         au! BufWritePre $HOME/.vim/todo exe ':%sort'
     else
         au! BufWritePre $HOME/vimfiles/todo exe ':%sort'
+    endif
+    if g:env == "LINUX"
+        set lines=100 columns=100
+    else
+        set lines=99999 columns=99999
     endif
 endfunction
 
